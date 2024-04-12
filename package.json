@@ -1,0 +1,42 @@
+{
+  "name": "chrome-extension-vite-react-antd",
+  "description": "Chrome extension with Vite, React, antd",
+  "author": {
+    "name": "huangkairan",
+    "email": "18757128360@163.com"
+  },
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "zip": "node ./scripts/zip.js",
+    "format": "prettier --write '**/*.{ts,tsx,css,md}'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:huangkairan/chrome-extension-vite-react-antd.git"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "antd": "^5.10.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.266",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@types/webextension-polyfill": "^0.10.0",
+    "@vitejs/plugin-react-swc": "^3.2.0",
+    "less": "^4.2.0",
+    "prettier": "^3.0.3",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.4",
+    "vite-plugin-web-extension": "^3.0.1",
+    "webextension-polyfill": "^0.10.0",
+    "zip-a-folder": "^3.1.3"
+  }
+}
