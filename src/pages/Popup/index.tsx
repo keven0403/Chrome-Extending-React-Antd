@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { AntDesignOutlined, RightCircleOutlined } from '@ant-design/icons';
+import { AntDesignOutlined } from '@ant-design/icons';
+import ComCibActionBar from '../../components/CibActionBar';
 import './index.less';
 
 export default function () {
@@ -16,6 +17,7 @@ export default function () {
       <AntDesignOutlined style={{ fontSize: '3rem' }} />
       <div onClick={buttonClick}>button click</div>
       <h1>chrome-extension-vite-react-antd</h1>
+      <ComCibActionBar />
     </div>
   );
 }

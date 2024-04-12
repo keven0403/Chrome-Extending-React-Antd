@@ -1,6 +1,8 @@
 {
   "{{chrome}}.manifest_version": 3,
   "{{firefox}}.manifest_version": 2,
+  "name": "My Chrome Extension",
+  "description": "A simple Chrome Extension built with React and Vite",
   "icons": {
     "16": "icon/16.png",
     "32": "icon/32.png",
@@ -21,7 +23,6 @@
   "{{firefox}}.browser_action": {
     "default_popup": "src/popup/index.html"
   },
-  "options_page": "src/options/index.html",
   "background": {
     "{{chrome}}.service_worker": "src/background/index.ts",
     "{{firefox}}.scripts": ["src/background.ts"]
