@@ -14,9 +14,12 @@ export default function () {
 
   return (
     <div className="popup">
-      <AntDesignOutlined style={{ fontSize: '3rem' }} />
-      <div onClick={buttonClick}>button click</div>
-      <h1>chrome-extension-vite-react-antd</h1>
+      <div className='chat-content'>
+        <AntDesignOutlined style={{ fontSize: '3rem' }} />
+        <div onClick={buttonClick}>button click</div>
+        <h1>chrome-extension-vite-react-antd</h1>
+      </div>
+      
       <ComCibActionBar />
     </div>
   );

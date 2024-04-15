@@ -10,7 +10,7 @@
     "96": "icon/96.png",
     "128": "icon/128.png"
   },
-  "permissions": ["sidePanel", "tabs"],
+  "permissions": ["sidePanel", "tabs", "activeTab"],
   "action": {
     "default_title": "Click to open panel"
   },
