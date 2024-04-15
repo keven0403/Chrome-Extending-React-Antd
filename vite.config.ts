@@ -15,6 +15,7 @@ function generateManifest() {
 }
 
 export default defineConfig({
+  base: './', // 如果你的资源文件是相对于项目根目录的，请设置正确的 base 路径
   plugins: [
     react(),
     webExtension({
