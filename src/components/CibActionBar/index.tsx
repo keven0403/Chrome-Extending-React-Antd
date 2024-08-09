@@ -5,13 +5,17 @@ import SendBut from '../../assets/images/send-but.png';
 
 
 export default function (props: any) {
+    const id = props.id || ''
+    console.log('id===', id)
     const [textContent, setTextContent] = useState('')
 
     const onChange = (value: string) => {
         setTextContent(value)
     }
 
-    const sendClick = () => {}
+    const sendClick = () => {
+        
+    }
 
     return (
         <div className="main-content">

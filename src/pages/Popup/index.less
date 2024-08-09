@@ -1,21 +1,18 @@
 .popup {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 0 10px 10px 10px;
-  box-sizing: border-box;
-}
+	width: 100%;
+	height: 100vh;
+	min-height: 100vh;
+	max-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	box-sizing: border-box;
+	background-color: #101015;
+	padding: 0 10px;
 
-.chat-content {
-  height: calc(100vh - 90px);
-  background-color: red;
-}
-
-h1 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
+	.chat-content {
+		position: relative;
+		box-sizing: border-box;
+		height: calc(100vh - 100px);
+	}
 }

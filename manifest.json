@@ -1,14 +1,14 @@
 {
   "{{chrome}}.manifest_version": 3,
   "{{firefox}}.manifest_version": 2,
-  "name": "My Chrome Extension",
+  "name": "Scopechat",
   "description": "A simple Chrome Extension built with React and Vite",
   "icons": {
-    "16": "icon/16.png",
-    "32": "icon/32.png",
+    "16": "icon/36.png",
+    "32": "icon/72.png",
     "48": "icon/48.png",
     "96": "icon/96.png",
-    "128": "icon/128.png"
+    "128": "icon/144.png"
   },
   "permissions": ["sidePanel", "tabs", "activeTab"],
   "action": {
