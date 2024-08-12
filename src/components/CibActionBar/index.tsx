@@ -14,11 +14,11 @@ export default function (props: any) {
     }
 
     const sendClick = () => {
-        
+        props.itemQuestionClick(textContent)
     }
 
     return (
-        <div className="main-content">
+        <div className="cli-content">
             <TextArea
                 id='enterMobileTextInputId'
                 placeholder='Ask me if you have any questions...'

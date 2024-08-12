@@ -4,10 +4,14 @@ import AnswerBlackIcon from '../../assets/images/answerBlack.png'
 import PromptWhiteIcon from '../../assets/images/promptWhiteIcon.png'
 import { ArrowRightOutlined, SearchOutlined } from '@ant-design/icons'
 
-export default function () {
+export default function (props: any) {
     useEffect(() => {
         console.log('Hello from the options!');
     }, [])
+
+    const itemClick = (question: string) => {
+        props.itemQuestionClick(question)
+    }
 
     return (
         <div className="home-content">
@@ -22,12 +26,12 @@ export default function () {
             </div>
 
             <div className='home-recommended-question'>
-                <div className='item-question'>
+                <div className='item-question' onClick={() => itemClick('Smart Money top performing tokens on the Polygon network.')}>
                     <div className='txt'>Smart Money top performing tokens on the Polygon network.</div>
                     <ArrowRightOutlined />
                 </div>
 
-                <div className='item-question'>
+                <div className='item-question' onClick={() => itemClick('Give me an investment report for the token COMAI on the Ethereum network.')}>
                     <div className='txt'>Give me an investment report for the token COMAI on the Ethereum network.</div>
                     <ArrowRightOutlined />
                 </div>
