@@ -2,7 +2,7 @@ import TextArea from 'antd/es/input/TextArea';
 import './index.less';
 import { useState } from 'react';
 import SendBut from '../../assets/images/send-but.png';
-
+const ethereum = window.ethereum
 
 export default function (props: any) {
     const id = props.id || ''
@@ -14,6 +14,7 @@ export default function (props: any) {
     }
 
     const sendClick = () => {
+        console.log('ethereum==', ethereum)
         props.itemQuestionClick(textContent)
     }
 
