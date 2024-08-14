@@ -9,7 +9,7 @@
     min-height: 60px;
     margin: auto;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 0 10px;
     z-index: 1;
     background: #242429;
     border-radius: 8px;
@@ -25,11 +25,12 @@
         box-sizing: border-box;
         color: #fff;
         word-break: break-all;
-        min-height: 40px;
-        max-height: 60px;
+        min-height: 30px;
+        max-height: 40px;
+        line-height: 22px;
         display: flex;
         align-items: center;
-        padding: 0 5px;
+        padding: 2px 5px 0 10px;
         margin: 0;
     }
     .ant-input::placeholder {
@@ -38,11 +39,42 @@
     .ant-input:focus {
         box-shadow: none;
     }
+
+    .anticon {
+        cursor: pointer;
+        font-size: 18px;
+        color: #fff;
+        margin-right: 5px;
+    }
+
+    .promptIcon {
+        cursor: pointer;
+    }
+
+    .AbortBtnContent {
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+        min-height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        .StopButContent {
+            width: 8px;
+            height: 8px;
+            background: #fff;
+        }
+    }
 }
 
 .send-but {
+    box-sizing: border-box;
     width: 30px;
+    min-width: 30px;
     height: 30px;
+    min-height: 30px;
     display: flex;
     align-items: center;
     justify-content: center;

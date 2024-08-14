@@ -16,39 +16,25 @@ import breaks from 'remark-breaks'
 import LinkRenderer from "./linkRenderer"
 const baseURL = "https://aitestchatm3.0xscope.com/"
 
-
 export default function (props: any, ref: any) {
     const question: string = props.question || ''
 
     const abortControllerRef = useRef<AbortController>()
     const [conversation, setConversation] = useState<InConversation[]>([])
     const baseInfoData: any = useRef({
-        messageList: [] as InConversation[]
+        messageList: [] as InConversation[],
+        interest: '',
+        isDisabled: false
     })
 
     useEffect(() => {
         if (question) {
-            initData(question)
+            sendClick(question)
         }
     }, [question])
 
-    const initData = (question: string) => {
-        baseInfoData.current.messageList = [
-            ...baseInfoData.current.messageList,
-            {
-                character: 'user', value: question, key: uuid(), error: false, msgId: '', chatId: '', recommends: []
-            },
-            {
-                character: 'bot', value: '', key: uuid(), error: false, msgId: '', chatId: '', recommends: [], displayExtra: '', state: 'pending'
-            }
-        ]
-        setConversation(baseInfoData.current.messageList)
-        sendClick(question)
-    }
-
     // 流式输出结果
     const getMessage = (message: string) => {
-        let interest: string = ''
         let chatId: string = ''
         abortControllerRef.current = new AbortController()
 
@@ -59,10 +45,10 @@ export default function (props: any, ref: any) {
             responseType: 'stream',
             headers: { 
                 'Content-Type': 'application/json', 
-                "AUTH-TOKEN": localStorage.getItem('token') || 'eyJhbGciOiJSUzI1NiJ9.eyJ0IjoxNzIyNDIwMTAzNzQxLCJiIjoiMHg2OTAyODhjOTljNWQwNzQyZTg3ZmFmZGI1ODdiZDhkYTRmYmE2NThlIiwiYyI6IjB4NjkwMjg4Yzk5YzVkMDc0MmU4N2ZhZmRiNTg3YmQ4ZGE0ZmJhNjU4ZSIsInYiOjB9.BqeeJ0lSpjqThPVJljY0tf4nlWlivf_a8eD-fZ5xPX5LAOgcK74G8Hbb2x5TZJn83tuytvUCO619w_iYWI4JfOnJQolPaxv-C4gguIV6fdIUa8GdveY2W-47Y-3f19H7pwIQmTaNqzzOrkX1B8NwjQLcU3xMG2Yna5IfZwRGnfw',
+                "AUTH-TOKEN": localStorage.getItem('token') || 'eyJhbGciOiJSUzI1NiJ9.eyJ0IjoxNzIxMzkxMDU2ODQ5LCJiIjoiMHg2OTAyODhjOTljNWQwNzQyZTg3ZmFmZGI1ODdiZDhkYTRmYmE2NThlIiwiYyI6IjB4NjkwMjg4Yzk5YzVkMDc0MmU4N2ZhZmRiNTg3YmQ4ZGE0ZmJhNjU4ZSIsInYiOjB9.B3Gb-shvAxH-glBIYN_ajyf-s8J9rhIjCiNjCmuajWuxI8HG8j9_MtJpR2G0ku4Uco6YO0GBl9EORKzuDdNscUrOuKgzt4sVR0-Ny8mdpnEo7r0B3Rn3-_V8VANIG7SqwjSI4yyA5xb2v1yTL1W6AQJ6jyxlbssR18KWLvU8VzU',
                 "platform": 'Chrome Extend'
             },
-            data: { chatId, message, interest },
+            data: { chatId, message, interest: baseInfoData.current.interest },
             signal: abortControllerRef.current.signal,
             onDownloadProgress({ event }) {
                 const chunk: string = event.target?.responseText || ''
@@ -78,16 +64,18 @@ export default function (props: any, ref: any) {
                             return pre
                         }) 
                     } catch (error) {
-                        console.error(error)     
+                        console.error(error)
+                        props.updateIsEndStatus(true)  
                     }
                 } else if (statusCode === 403) {
                     location.reload()
+                    props.updateIsEndStatus(true)
                 }
             }
         }).catch((error: AxiosError) => {
-            
+            props.updateIsEndStatus(true)
         }).finally(() => {
-            
+            props.updateIsEndStatus(true)
         })
 
         setTimeout(() => {
@@ -98,6 +86,17 @@ export default function (props: any, ref: any) {
 
     // 发送消息
     const sendClick = (question: string) => {
+        if (!question) return
+        baseInfoData.current.messageList = [
+            ...baseInfoData.current.messageList,
+            {
+                character: 'user', value: question, key: uuid(), error: false, msgId: '', chatId: '', recommends: []
+            },
+            {
+                character: 'bot', value: '', key: uuid(), error: false, msgId: '', chatId: '', recommends: [], displayExtra: '', state: 'pending'
+            }
+        ]
+        setConversation(baseInfoData.current.messageList)
         getMessage(question)
     }
 
@@ -107,7 +106,7 @@ export default function (props: any, ref: any) {
         const childElements = parentElement?.children
         if (childElements.length >= 2) {
             const clientHeight: number = childElements[childElements.length - 2].clientHeight
-            childElements[childElements.length - 1].style.minHeight = viewportHeight - clientHeight - 200 + 'px'
+            childElements[childElements.length - 1].style.minHeight = viewportHeight - clientHeight + 'px'
             childElements[childElements.length - 2].scrollIntoView({ behavior: 'smooth', block: 'start' })
         }
     }
@@ -121,9 +120,34 @@ export default function (props: any, ref: any) {
         
     }
 
-    const refreshClick = (msgId: string) => {}
+    const refreshClick = (msgId: string) => {
+        // 根据id更新特定项目的completed状态
+        setConversation((prevItems: any) =>
+            prevItems.map((item: any) => {
+                if (item.msgId === msgId) {
+                    item?.recommends?.map((recommend: any) => {
+                        recommend.isShow = !recommend.isShow
+                    })
+                }
+                return item
+            })
+        )
+    }
 
-    const itemRecommendClick = async (text: string, info: string, type: string) => {}
+    const itemRecommendClick = async (text: string, info: string, type: string) => {
+        if (['Token', 'Project', 'Wallet & Entities', 'Knowledge Hub', 'Rankings and Stats'].includes(type)) {
+            
+        } else {
+            updateTokenInClude(text, '')
+        }
+    }
+
+    const updateTokenInClude = (question: string, interest: string) => {
+        if (!baseInfoData.current.isDisabled) {
+            baseInfoData.current.interest = interest || baseInfoData.current.interest
+            sendClick(question)
+        }
+    }
     
     return (
         <div id='TopCibChatMainId' className="conversation-content">
