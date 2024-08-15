@@ -86,3 +86,92 @@
         height: auto;
     }
 }
+
+.easy-modal {
+    position: absolute;
+    bottom: 70px;
+    width: 100%;
+    height: 230px;
+    background: #242428;
+    margin: auto;
+    border-radius: 5px;
+    left: 0;
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+    .tab-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #57575A;
+        padding-bottom: 5px;
+        .item-tab {
+            font-size: 14px;
+            font-family: Inter;
+            font-weight: 700;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 2px;
+            cursor: pointer;
+            &:hover {
+                color: #3AC89F;
+            }
+        }
+        .active {
+            background: rgba(58, 200, 159, 0.2);
+            color: #3AC89F;
+            border: 5px;
+        }
+    }
+
+    .data-content {
+        position: relative;
+        margin-top: 10px;
+        height: calc(100% - 45px);
+        overflow: auto;
+    }
+
+    .ant-tabs {
+        .ant-tabs-nav {
+            .ant-tabs-nav-wrap {
+                .ant-tabs-nav-list {
+                    .ant-tabs-tab {
+                        .ant-tabs-tab-btn {
+                            font-size: 12px;
+                            font-family: Inter;
+                            font-weight: 700;
+                            color: #fff;
+                            padding: 5px 10px;
+                            border-radius: 2px;
+                            cursor: pointer;
+                            &:hover {
+                                color: #3AC89F;
+                            }
+                        }
+                    }
+                    .ant-tabs-tab-active {
+                        .ant-tabs-tab-btn {
+                            background: rgba(58, 200, 159, 0.2);
+                            color: #3AC89F;
+                            border: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* 定义渐变显示的关键帧动画 */
+@keyframes fade-in {
+    0% {
+        opacity: 0; /* 开始时完全透明 */
+    }
+    100% {
+        opacity: 1; /* 结束时完全不透明 */
+    }
+}
+
+/* 应用动画到指定的元素 */
+.fade-in-element {
+    animation: fade-in 1s ease-out; /* 使用1.5秒的时间来执行动画 */
+}

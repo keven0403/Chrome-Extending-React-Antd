@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import SendBut from '../../assets/images/send-but.png';
 import { SearchOutlined } from '@ant-design/icons';
 import PromptWhiteIcon from '../../assets/images/promptWhiteIcon.png';
+import EasyModal from './easyModal'
 
 export default function (props: any) {
     const id = props.id || ''
@@ -57,6 +58,8 @@ export default function (props: any) {
                         <img className='iconImg' src={SendBut} alt="" />
                     </div>
             }
+
+            <EasyModal />
         </div>
     )
 }
